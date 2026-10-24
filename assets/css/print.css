@@ -1,0 +1,128 @@
+/* ============================================================================
+   print.css — Estilo exclusivo das páginas de impressão (imprimir-*.php)
+   Mantido separado do style.css de propósito: a versão impressa não deve
+   herdar cabeçalho/rodapé/navegação do site, só o essencial para o papel.
+   ============================================================================ */
+@page { margin: 16mm 14mm; }
+
+:root {
+    --imp-azul: #0f2c4f;
+    --imp-laranja: #e0640f;
+    --imp-amarelo: #8a6600;
+    --imp-vermelho: #971d33;
+    --imp-verde: #146341;
+    --imp-cinza-claro: #f1f3f6;
+    --imp-borda: #b9c2cd;
+}
+
+body {
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    color: #16202c;
+    font-size: 11.5pt;
+    margin: 0;
+}
+
+.imp-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid var(--imp-azul);
+    padding-bottom: 10px;
+    margin-bottom: 6px;
+}
+.imp-cabecalho .imp-marca {
+    font-family: "Barlow Condensed", Arial, sans-serif;
+    font-size: 20pt;
+    font-weight: 800;
+    color: var(--imp-azul);
+}
+.imp-cabecalho .imp-meta { text-align: right; font-size: 9.5pt; color: #5c6b7a; }
+
+/* Faixa diagonal azul/laranja, a mesma assinatura visual do site, em versão
+   fina para o papel. */
+.imp-faixa {
+    height: 4px;
+    margin-bottom: 14px;
+    background: repeating-linear-gradient(-45deg, var(--imp-laranja) 0 10px, var(--imp-azul) 10px 20px);
+}
+
+.imp-info { margin-bottom: 14px; font-size: 10.5pt; }
+.imp-info strong { display: inline-block; min-width: 140px; color: var(--imp-azul); }
+
+table.imp-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 10pt;
+}
+table.imp-tabela thead th {
+    background: var(--imp-azul);
+    color: #fff;
+    padding: 7px 9px;
+    text-align: left;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+table.imp-tabela td {
+    border: 1px solid var(--imp-borda);
+    padding: 7px 9px;
+    text-align: left;
+}
+table.imp-tabela tbody tr:nth-child(even) td { background: var(--imp-cinza-claro); }
+table.imp-tabela td.num, table.imp-tabela th.num { text-align: right; }
+table.imp-tabela td.center, table.imp-tabela th.center { text-align: center; }
+
+/* Selos de situação/status na versão impressa (cores mais discretas que na tela,
+   pensadas para impressão em preto-e-branco também continuar legível). */
+.imp-selo { font-weight: 700; padding: 2px 8px; border-radius: 999px; font-size: 8.5pt; display: inline-block; }
+.imp-selo-normal     { background: #e6eefb; color: var(--imp-azul); }
+.imp-selo-importante { background: #fdf3d6; color: var(--imp-amarelo); }
+.imp-selo-urgente    { background: #fbe3e8; color: var(--imp-vermelho); }
+.imp-selo-novo         { background: #eef0f4; color: #444d5c; }
+.imp-selo-em_andamento { background: #e6eefb; color: var(--imp-azul); }
+.imp-selo-parcial      { background: #fdf3d6; color: var(--imp-amarelo); }
+.imp-selo-concluido    { background: #e2f5ea; color: var(--imp-verde); }
+
+.imp-totais {
+    margin-top: 16px;
+    display: flex;
+    gap: 30px;
+    font-size: 12pt;
+    font-weight: 800;
+    color: var(--imp-laranja);
+}
+
+/* Cada item de um extrato de serviços (histórico do dia impresso) */
+.imp-extrato-item { border-bottom: 1px dashed var(--imp-borda); padding: 10px 0; }
+.imp-extrato-item__topo { display: flex; justify-content: space-between; font-size: 11.5pt; font-weight: 700; color: var(--imp-azul); }
+.imp-extrato-item__desc { font-size: 10pt; color: #444; margin: 4px 0; }
+.imp-extrato-item__meta { font-size: 9pt; color: #5c6b7a; }
+
+.imp-rodape {
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid var(--imp-borda);
+    font-size: 8.5pt;
+    color: #5c6b7a;
+    text-align: center;
+}
+
+.imp-acoes-tela {
+    text-align: right;
+    margin-bottom: 14px;
+}
+.imp-acoes-tela button {
+    background: var(--imp-laranja);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 10.5pt;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media print {
+    .imp-acoes-tela { display: none; }
+}
